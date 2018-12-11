@@ -12,8 +12,6 @@ logs/
 *.js
 !.autod.conf.js
 package-lock.json
-app/public/swagger/**
-!app/public/swagger/definitions/
 
 app/**/*.js
 test/**/*.js
