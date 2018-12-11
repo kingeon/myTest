@@ -1,7 +1,7 @@
 {
-    "name": "sorting",
+    "name": "{{name}}",
     "version": "1.0.0",
-    "description": "",
+    "description": "{{description}}",
     "private": true,
     "egg": {
         "typescript": true
@@ -70,6 +70,6 @@
     "eslintIgnore": [
         "coverage"
     ],
-    "author": "",
+    "author": "{{author}}",
     "license": "MIT"
 }
