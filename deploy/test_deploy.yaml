@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sorting
+  namespace: icoastline-test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sorting
+    spec:
+      containers:
+      - name: sorting
+        image: registry.dev.com:5000/icoastline/qcloud_sorting:IMAGE_VERSION
+        ports:
+        - name: default
+          containerPort: 7001
+        #envFrom: 
+        #- configMapRef: 
+            #name: db-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: sorting
+  name: sorting
+  namespace: icoastline-test
+spec:
+  ports:
+  - port: 80
+    targetPort: 7001
+    name: default
+  selector:
+    app: sorting
+---
