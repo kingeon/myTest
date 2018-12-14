@@ -6,7 +6,7 @@ export default () => {
         username: process.env.APPUserName || 'owner',
         password: process.env.APPPassword || 'owner_1a2b3c',
         type: 'postgres',
-        database: 'lcfc-sorting',
+        database: '',
         port: 5432,
         synchronize: true,
         entities: ['app/entity/**/*.ts'],

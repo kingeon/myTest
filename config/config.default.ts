@@ -40,8 +40,6 @@ export default (appInfo: EggAppInfo) => {
         accountUrl: 'http://itest-gateway.icoastline.cn:5555/account',
         emailUrl: 'http://itest-gateway.icoastline.cn:5555/notice/inner-api/v1/notice'
     };
-    //sorting在icoastline 注册的app-key
-    config.appKey = 'd3ba0976-0bb8-4b07-af31-115384667391';
     // override config from framework / plugin
     // use for cookie sign key, should change to your own and keep security
     config.keys = appInfo.name + '_1540776367524_6331';
