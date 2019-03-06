@@ -1,0 +1,34 @@
+{
+    "Response": {
+        "type": "object",
+        "properties": {
+            "code": {
+                "type": "integer",
+                "description": "返回编码"
+            },
+            "data": {
+                "type": "object",
+                "description": "返回数据"
+            },
+            "message": {
+                "type": "string",
+                "description": "错误信息"
+            }
+        }
+    },
+    "properties": {
+        "type": "object",
+        "properties": {
+            "companyId": {
+                "require": false,
+                "type": "string",
+                "description": "公司ID"
+            },
+            "name": {
+                "require": true,
+                "type": "string",
+                "description": "模板名称"
+            }
+        }
+    }
+}

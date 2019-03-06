@@ -7,15 +7,15 @@ export default (app: Application) => {
         quickStart: false,
         swaggerOpt: {
             open: true,
-            title: 'Sorting 接口文档',
+            title: 'xxx接口文档',
             version: '1.0.0',
-            host: 'itest-gateway.icoastline.cn',
+            host: '',
             port: 5555,
-            basePath: '/sorting',
+            basePath: '/xxx',
             schemes: ['http'],
             paths: {
                 outPath: './app/public/swagger/main.json',
-                definitionPath: './app/public/swagger/definitions/main.json',
+                definitionPath: './app/public/swagger/definitions',
                 swaggerPath: './app/public/swagger',
             },
             tokenOpt: {
