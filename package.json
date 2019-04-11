@@ -7,8 +7,8 @@
         "typescript": true
     },
     "scripts": {
-        "start": "egg-scripts start --title=egg-server-sorting",
-        "stop": "egg-scripts stop --title=egg-server-sorting",
+        "start": "egg-scripts start --title=egg-server-{{name}}",
+        "stop": "egg-scripts stop --title=egg-server-{{name}}",
         "dev": "egg-bin dev -r egg-ts-helper/register",
         "debug": "egg-bin debug -r egg-ts-helper/register",
         "test-local": "egg-bin test -r egg-ts-helper/register",
