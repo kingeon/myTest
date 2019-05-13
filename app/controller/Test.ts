@@ -1,17 +1,16 @@
 import { BaseController } from './baseController';
-import { Get, Prefix, Responses, Description, Parameters, TagsAll, Post, Put, Delete, Hidden } from 'egg-shell-decorators';
+import { Get, Prefix, Responses, Description, Parameters, TagsAll, Post, Put, Delete, Hidden,Security } from 'egg-shell-decorators-v2';
 import { ValidationError } from '../entity/HandleError';
 @TagsAll('测试API')
 @Prefix('/api/test')
 export default class TestController extends BaseController {
     @Get('/:id')
-    @Hidden
     @Description('根据id获取信息')
     @Parameters([
-        { name: 'x-auth-token', in: 'header', description: 'token', required: true, type: 'string' },
         { name: 'id', in: 'path', description: 'id', required: true, type: 'string' }
     ])
     @Responses({ 200: { description: '成功', schema: { type: 'object', $ref: '#/definitions/Response' } } })
+	@Security([{ ApiKeyAuth: [] }])
     public async getQualitativeQuantifyConfig({ params: { id } }) {
         return this.success(id);
     }
@@ -19,7 +18,6 @@ export default class TestController extends BaseController {
     @Post('')
     @Description('新增')
     @Parameters([
-        { name: 'x-auth-token', in: 'header', description: 'token', required: true, type: 'string' },
         {
             name: 'body', in: 'body', required: true, schema: {
                 type: 'object',
@@ -34,6 +32,7 @@ export default class TestController extends BaseController {
         }
     ])
     @Responses({ 200: { description: '成功', schema: { type: 'object', $ref: '#/definitions/Response' } } })
+	@Security([{ ApiKeyAuth: [] }])
     public async copyCheckScheme({ body }) {
         const rule = {
             checkSettingId: 'number',
@@ -48,7 +47,6 @@ export default class TestController extends BaseController {
     @Put('')
     @Description('更新')
     @Parameters([
-        { name: 'x-auth-token', in: 'header', description: 'token', required: true, type: 'string' },
         {
             name: 'body', in: 'body', required: true, schema: {
                 type: 'object',
@@ -68,6 +66,7 @@ export default class TestController extends BaseController {
         }
     ])
     @Responses({ 200: { description: '成功', schema: { type: 'object', $ref: '#/definitions/Response' } } })
+	@Security([{ ApiKeyAuth: [] }])
     public async updateCheckSetting({ body }) {
         const rule = {
             id: 'number?',
@@ -84,10 +83,10 @@ export default class TestController extends BaseController {
     @Delete('/:id')
     @Description('删除')
     @Parameters([
-        { name: 'x-auth-token', in: 'header', description: 'token', required: true, type: 'string' },
         { name: 'id', in: 'path', description: 'id', required: true, type: 'string' },
     ])
     @Responses({ 200: { description: '成功', schema: { type: 'object', $ref: '#/definitions/Response' } } })
+	@Security([{ ApiKeyAuth: [] }])
     public async deleteCheckSettingQualitative({ params: { id } }) {
         if (!id) {
             throw new ValidationError('id 不能为空');

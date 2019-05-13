@@ -1,8 +1,8 @@
 import { Application } from 'egg';
-import { EggShell } from 'egg-shell-decorators';
+import { EggShell } from 'egg-shell-decorators-v2';
 
 export default (app: Application) => {
-    EggShell(app, {
+    let options = {
         prefix: '/',
         quickStart: false,
         swaggerOpt: {
@@ -18,13 +18,19 @@ export default (app: Application) => {
                 definitionPath: './app/public/swagger/definitions',
                 swaggerPath: './app/public/swagger',
             },
-            tokenOpt: {
-                default: 'manager',
-                tokens: {
-                    manager: '123',
-                    user: '321',
+            securityDefinitions: {
+                ApiKeyAuth: {
+                    type: "apiKey",
+                    in: "header",
+                    name: "X-Auth-Token"
                 },
             }
         },
-    });
+    };
+    if (app.env === 'local') {
+        options.swaggerOpt.host = '127.0.0.1';
+        options.swaggerOpt.port = 7001;
+        options.swaggerOpt.basePath = '/';
+    }
+    EggShell(app, options);
 };
