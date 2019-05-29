@@ -1,13 +1,9 @@
 import { Application } from 'egg';
 import { EggShell } from 'egg-shell-decorators-v2';
-const Before = require('./middleware/before');
-const After = require('./middleware/after');
 export default (app: Application) => {
     let options = {
         prefix: '/',
         quickStart: false,
-        before: [Before],
-        after: [After],
         swaggerOpt: {
             open: true,
             title: 'xxx接口文档',
