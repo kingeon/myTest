@@ -49,6 +49,12 @@ export default (appInfo: EggAppInfo) => {
         allowMethods: 'GET,PUT,POST,DELETE,PATCH',
     }
 
+    config.customLogger = {
+        apiLogger: {
+            file: path.join(appInfo.root, '/app/public/logs/api.log'),
+        }
+    };
+
     // add your special config in here
     // const bizConfig = {
     //   sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,

@@ -1,5 +1,5 @@
 import { BaseController } from './baseController';
-import { Get, Prefix, Responses, Description, Parameters, TagsAll, Post, Put, Delete, Hidden,Security } from 'egg-shell-decorators-v2';
+import { Get, Prefix, Responses, Description, Parameters, TagsAll, Post, Put, Delete, Security } from 'egg-shell-decorators-v2';
 import { ValidationError } from '../entity/HandleError';
 @TagsAll('测试API')
 @Prefix('/api/test')
