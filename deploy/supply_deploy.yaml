@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: TODO:
-  namespace: icoastline-test
+  namespace: supply
 spec:
   replicas: 1
   template:
@@ -12,13 +12,15 @@ spec:
     spec:
       containers:
       - name: TODO:
-        image: registry.dev.com:5000/icoastline/TODO::IMAGE_VERSION
+        image: ccr.ccs.tencentyun.com/icoastline/TODO::IMAGE_VERSION
         ports:
         - name: default
           containerPort: 7001
         env:
         - name : EGG_SERVER_ENV
-          value : 'test'
+          value : 'demo'
+      imagePullSecrets:
+      - name: qcloudregistrykey
 ---
 kind: Service
 apiVersion: v1
@@ -26,7 +28,7 @@ metadata:
   labels:
     app: TODO:
   name: TODO:
-  namespace: icoastline-test
+  namespace: supply
 spec:
   ports:
   - port: 80

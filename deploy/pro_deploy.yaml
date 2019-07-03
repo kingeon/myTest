@@ -1,37 +1,38 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: sorting
-  namespace: icoastline-dev
+  name: TODO:
+  namespace: le-pro
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: sorting
+        app: TODO:
     spec:
       containers:
-      - name: sorting
-        image: registry.dev.com:5000/icoastline/qcloud_sorting:IMAGE_VERSION
+      - name: TODO:
+        image: ccr.ccs.tencentyun.com/le_pro/TODO::IMAGE_VERSION
         ports:
         - name: default
           containerPort: 7001
-        envFrom: 
-        - configMapRef: 
-            name: db-config
+        env:
+        - name : EGG_SERVER_ENV
+          value : 'prod'
+      imagePullSecrets:
+      - name: qcloudregistrykey
 ---
 kind: Service
 apiVersion: v1
 metadata:
   labels:
-    app: sorting
-  name: sorting
-  namespace: icoastline-dev
+    app: TODO:
+  name: TODO:
+  namespace: le-pro
 spec:
   ports:
   - port: 80
     targetPort: 7001
     name: default
   selector:
-    app: sorting
----
+    app: TODO:
