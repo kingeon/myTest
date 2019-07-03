@@ -11,7 +11,7 @@ export default () => {
         port: 5432,
         synchronize: true,
         logger: new SqlLogger(),
-        entities: ['app/entity/**/*.ts'],
+        entities: ['app/entity/**/*.js'],
     };
     return config;
 };

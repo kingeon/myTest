@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+import { format } from 'date-fns';
 
 export default function () {
     return async (ctx, next) => {
@@ -20,6 +21,7 @@ export default function () {
             return;
         }
         ctx.userInfo = data.decoded as UserInfo;
+        ctx.logger.info(format(new Date(), 'YYYY-MM/DD HH:mm:ss'), ctx.ip, ctx.method, ctx.url, 'userId:', data.decoded.userId, 'body:', ctx.body || '');
         await next();
     };
 }
