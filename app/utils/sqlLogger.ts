@@ -1,8 +1,8 @@
 import { Logger } from 'typeorm';
 const PlatformTools_1 = require('typeorm/platform/PlatformTools');
-const fs = require('mz/fs');
-import { format, differenceInDays } from 'date-fns';
-export class SqlLogger implements Logger {
+// const fs = require('mz/fs');
+import { format } from 'date-fns';
+export class MyLogger implements Logger {
     private options: string | boolean | Array<string> | undefined = 'all';
 
     /**
@@ -73,14 +73,14 @@ export class SqlLogger implements Logger {
     async write(strings) {
         strings = strings instanceof Array ? strings : [strings];
         var basePath = PlatformTools_1.PlatformTools.load('app-root-path').path;
-        const path = basePath + '/app/public/logs/ormlogs.log';
-        const exists = await fs.exists(path);
-        if (exists) {
-            const stats = await fs.stat(path);
-            if (differenceInDays(new Date(), stats.birthtime) >= 7) {
-                await fs.unlinkSync(path);
-            }
-        }
+        const path = basePath + `/app/public/logs/${format(new Date(), 'YYYY-MM-DD')}.log`;
+        // const exists = await fs.exists(path);
+        // if (exists) {
+        //     const stats = await fs.stat(path);
+        //     if (differenceInDays(new Date(), stats.birthtime) >= 7) {
+        //         await fs.unlinkSync(path);
+        //     }
+        // }
 
         strings = strings.map(function (str) { return '[' + format(new Date(), 'YYYY-MM-DD HH:mm:ss') + ']' + str; });
         PlatformTools_1.PlatformTools.appendFileSync(path, strings.join('\r\n') + '\r\n');
