@@ -4,6 +4,18 @@ import * as path from 'path';
 export default (appInfo: EggAppInfo) => {
     const config = {} as PowerPartial<EggAppConfig>;
 
+    config.postgres = {
+        host: '192.168.2.179',
+        username: 'postgres',
+        password: '1qaz2wsx#EDC',
+        type: 'postgres',
+        database: 'postgres',
+        port: 5432,
+        synchronize: true,
+        logger: new SqlLogger(),
+        entities: ['app/entity/**/*.ts'],
+    };
+
     // 日志名称配置
     config.logger = {
         dir: path.join(__dirname, '../app/public/logs/'),
