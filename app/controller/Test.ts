@@ -1,6 +1,6 @@
 import { BaseController } from './baseController';
 import { Get, Prefix, Responses, Description, Parameters, TagsAll, Post, Put, Delete, Security } from 'egg-shell-decorators-v2';
-import { ValidationError } from '../entity/HandleError';
+import { ValidationError } from '../utils/HandleError';
 @TagsAll('测试API')
 @Prefix('/api/test')
 export default class TestController extends BaseController {
@@ -10,7 +10,7 @@ export default class TestController extends BaseController {
         { name: 'id', in: 'path', description: 'id', required: true, type: 'string' }
     ])
     @Responses({ 200: { description: '成功', schema: { type: 'object', $ref: '#/definitions/Response' } } })
-	@Security([{ ApiKeyAuth: [] }])
+    @Security([{ ApiKeyAuth: [] }])
     public async getQualitativeQuantifyConfig({ params: { id } }) {
         return this.success(id);
     }
@@ -23,25 +23,43 @@ export default class TestController extends BaseController {
                 type: 'object',
                 properties: {
                     id: { description: 'id', require: true, type: 'integer' },
-                    toMaterialNos: {
-                        type: 'array', required: true, description: '类型',
+                    course: {
+                        type: 'array', required: true, description: '课程',
                         items: { type: 'string' }
+                    },
+                    users: {
+                        type: 'array', required: true, description: '用户',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                name: { type: 'string', description: '姓名' },
+                                age: { type: 'integer', description: '年龄' },
+                                gender: { type: 'string', enum: ['male', 'female'], description: '性别' }
+                            }
+                        }
                     }
                 }
             }
         }
     ])
     @Responses({ 200: { description: '成功', schema: { type: 'object', $ref: '#/definitions/Response' } } })
-	@Security([{ ApiKeyAuth: [] }])
+    @Security([{ ApiKeyAuth: [] }])
     public async copyCheckScheme({ body }) {
         const rule = {
-            checkSettingId: 'number',
-            toMaterialNos: {
+            id: 'number',
+            course: {
                 type: 'array', itemType: 'string'
+            },
+            users: {
+                type: 'array', itemType: 'object', rule: {
+                    name: 'string',
+                    age: 'int',
+                    gender: ['male', 'female']
+                }
             }
         };
         this.ctx.validate(rule, body);
-        return this.success('');
+        return this.success(body);
     }
 
     @Put('')
@@ -66,7 +84,7 @@ export default class TestController extends BaseController {
         }
     ])
     @Responses({ 200: { description: '成功', schema: { type: 'object', $ref: '#/definitions/Response' } } })
-	@Security([{ ApiKeyAuth: [] }])
+    @Security([{ ApiKeyAuth: [] }])
     public async updateCheckSetting({ body }) {
         const rule = {
             id: 'number?',
@@ -86,7 +104,7 @@ export default class TestController extends BaseController {
         { name: 'id', in: 'path', description: 'id', required: true, type: 'string' },
     ])
     @Responses({ 200: { description: '成功', schema: { type: 'object', $ref: '#/definitions/Response' } } })
-	@Security([{ ApiKeyAuth: [] }])
+    @Security([{ ApiKeyAuth: [] }])
     public async deleteCheckSettingQualitative({ params: { id } }) {
         if (!id) {
             throw new ValidationError('id 不能为空');

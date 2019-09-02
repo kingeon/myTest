@@ -1,16 +1,16 @@
 import { Application } from 'egg';
 import { EggShell } from 'egg-shell-decorators-v2';
 export default (app: Application) => {
-    let options = {
+    let options:any = {
         prefix: '/',
         quickStart: false,
         swaggerOpt: {
             open: true,
             title: 'xxx接口文档',
             version: '1.0.0',
-            host: '',
-            port: 5555,
-            basePath: '/xxx',
+            host: '127.0.0.1',
+            port: 7001,
+            basePath: '/',
             schemes: ['http'],
             paths: {
                 outPath: './app/public/swagger/main.json',
@@ -26,10 +26,11 @@ export default (app: Application) => {
             }
         },
     };
-    if (app.env === 'local') {
-        options.swaggerOpt.host = '127.0.0.1';
-        options.swaggerOpt.port = 7001;
-        options.swaggerOpt.basePath = '/';
+    if (app.config.env === 'test') {
+        options.swaggerOpt.host = '';
+        options.swaggerOpt.port = '';
+        options.swaggerOpt.basePath = '';
     }
+    //...any other env
     EggShell(app, options);
 };

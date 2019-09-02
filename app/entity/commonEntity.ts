@@ -4,7 +4,7 @@ import {
 } from 'typeorm';
 
 import { IsDate, IsOptional, IsString, validate, ValidatorOptions } from 'class-validator';
-import { ValidationError } from './HandleError';
+import { ValidationError } from '../utils/HandleError';
 /**
  *  公共字段
  *

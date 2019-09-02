@@ -1,5 +1,5 @@
 import { EggAppConfig, PowerPartial } from 'egg';
-import { SqlLogger } from '../app/utils/sqlLogger';
+import { MyLogger } from '../app/utils/sqlLogger';
 export default () => {
     const config: PowerPartial<EggAppConfig> = {};
     config.postgres = {
@@ -10,7 +10,7 @@ export default () => {
         database: '',//
         port: 5432,
         synchronize: true,
-        logger: new SqlLogger(),
+        logger: new MyLogger(),
         entities: ['app/entity/**/*.js'],
     };
 

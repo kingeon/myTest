@@ -1,5 +1,6 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 import * as path from 'path';
+import { MyLogger } from '../app/utils/sqlLogger';
 
 export default (appInfo: EggAppInfo) => {
     const config = {} as PowerPartial<EggAppConfig>;
@@ -12,7 +13,7 @@ export default (appInfo: EggAppInfo) => {
         database: 'postgres',
         port: 5432,
         synchronize: true,
-        logger: new SqlLogger(),
+        logger: new MyLogger(),
         entities: ['app/entity/**/*.ts'],
     };
 
@@ -22,8 +23,7 @@ export default (appInfo: EggAppInfo) => {
         appLogName: 'dev.log',
         coreLogName: 'framework.log',
         agentLogName: 'agent.log',
-        errorLogName: 'error.log',
-        coreLogger: 'egg-schedule.log',
+        errorLogName: 'error.log'
     };
 
     // 日志按天分割
