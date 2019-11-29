@@ -1,20 +1,12 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 import * as path from 'path';
-import { MyLogger } from '../app/utils/sqlLogger';
 
 export default (appInfo: EggAppInfo) => {
     const config = {} as PowerPartial<EggAppConfig>;
 
-    config.postgres = {
-        host: '192.168.2.179',
-        username: 'postgres',
-        password: '1qaz2wsx#EDC',
-        type: 'postgres',
-        database: 'postgres',
-        port: 5432,
-        synchronize: true,
-        logger: new MyLogger(),
-        entities: ['app/entity/**/*.ts'],
+    // 各个服务url配置
+    config.serviceUrl = {
+        host: 'http://test.api.icoastline.com'
     };
 
     // 日志名称配置
