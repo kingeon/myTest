@@ -21,7 +21,7 @@ export default function () {
             return;
         }
         ctx.userInfo = data.decoded as UserInfo;
-        ctx.logger.info(format(new Date(), 'YYYY-MM/DD HH:mm:ss'), ctx.ip, ctx.method, ctx.url, 'userId:', data.decoded.userId, 'body:', ctx.body || '');
+        ctx.logger.info(format(new Date(), 'YYYY-MM/DD HH:mm:ss'), ctx.ip, ctx.method, ctx.url, 'userId:', data.decoded.userId, 'body:', JSON.stringify(ctx.request.body) || '');
         await next();
     };
 }
